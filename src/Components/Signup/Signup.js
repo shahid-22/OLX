@@ -7,7 +7,9 @@ import { Firebasecontext } from '../../store/Firebasecontext';
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 // import { createUserWithEmailAndPassword } from 'firebase/auth'
 // import { firebase } from '../../firebase/config';
-
+// import {doc, setDoc } from "firebase/firestore"; 
+import {db} from '../../firebase/config'
+import { collection, addDoc } from "firebase/firestore"; 
 
 export default function Signup() {
 
@@ -16,8 +18,9 @@ export default function Signup() {
   const [phone, setphone] = useState("")
   const [password, setpassword] = useState("")
   const { firebase } = useContext(Firebasecontext)
-  const handilsubmit = (e) => {
+  const handilsubmit = async(e) => {
     e.preventDefault()
+    try{
     console.log("email", email);
     console.log("password", password);
     console.log("auth", firebase);
@@ -25,15 +28,34 @@ export default function Signup() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        console.log("arrived the success 3456890543457890%^&)$%^*)");
-        const user = userCredential.user;
-        // ...
+        console.log("arrived the success 3456890543457890%^&$%^*");
+        console.log(userCredential);
+        const user=userCredential.user
+        console.log('hhh',user);
+        console.log(db);
+      
+        addDoc(collection(db, "users"), {
+          id:userCredential.user.uid,
+          username:Username,
+          phone:phone
+        })
+        .then((response)=>{
+          console.log(response, "successss4567909754");
+        })
+        .catch((err)=>{
+          console.log(err,"somethignis nonkdnsdjibcdj");
+        })
+        // console.log("Document written with ID: ", docRef.id);
+    
+
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log("jjjj",error);
         // ..
       });
+    }catch(error){
+      console.log('hii',error);
+    }
   }
 
   return (
