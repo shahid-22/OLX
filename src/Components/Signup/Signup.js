@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-
+import {useNavigate} from "react-router-dom"
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { Firebasecontext } from '../../store/Firebasecontext';
@@ -12,7 +12,7 @@ import {db} from '../../firebase/config'
 import { collection, addDoc } from "firebase/firestore"; 
 
 export default function Signup() {
-
+  const navigate = useNavigate();
   const [Username, setusername] = useState("")
   const [email, setemail] = useState("")
   const [phone, setphone] = useState("")
@@ -40,9 +40,11 @@ export default function Signup() {
           phone:phone
         })
         .then((response)=>{
+          navigate('/login')
           console.log(response, "successss4567909754");
         })
         .catch((err)=>{
+          navigate('/signup')
           console.log(err,"somethignis nonkdnsdjibcdj");
         })
         // console.log("Document written with ID: ", docRef.id);
