@@ -6,6 +6,7 @@ import Login from "./Components/Login/Login";
 import { AuthContext } from "./store/Firebasecontext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Create from "./Components/Create/Create";
+import View from "./Components/View/View";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/signup"  element={<SignupPage/>} />
         <Route exact path="/login"  element={<Login/>} />
         <Route exact path="/sell"  element={<Create/>} />
+        <Route exact path="/view"  element={<View/>} />
      </Routes>
      </BrowserRouter>
     </div>
