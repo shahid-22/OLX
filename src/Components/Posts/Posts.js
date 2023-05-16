@@ -1,10 +1,17 @@
-import React from 'react';
+import React,{useEffect,useContext,useState} from 'react';
+import { collection, getDocs } from 'firebase/firestore';
 
 import Heart from '../../assets/Heart';
 import './Post.css';
+import { Firebasecontext } from '../../store/Firebasecontext';
 
 function Posts() {
+ const {firebase} =useContext(Firebasecontext)
+ const [products,setproducts]=useState()
 
+ useEffect(()=>{
+
+ },[])
   return (
     <div className="postParentDiv">
       <div className="moreView">

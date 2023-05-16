@@ -3,21 +3,19 @@ import {useNavigate} from "react-router-dom"
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { Firebasecontext } from '../../store/Firebasecontext';
-
 import {getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
-// import { createUserWithEmailAndPassword } from 'firebase/auth'
-// import { firebase } from '../../firebase/config';
-// import {doc, setDoc } from "firebase/firestore"; 
 import {db} from '../../firebase/config'
 import { collection, addDoc } from "firebase/firestore"; 
 
 export default function Signup() {
+
   const navigate = useNavigate();
   const [Username, setusername] = useState("")
   const [email, setemail] = useState("")
   const [phone, setphone] = useState("")
   const [password, setpassword] = useState("")
   const { firebase } = useContext(Firebasecontext)
+
   const handilsubmit = async(e) => {
     e.preventDefault()
     try{
@@ -122,7 +120,7 @@ export default function Signup() {
           <br />
           <button type='submit'>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={()=>{navigate("/login")}}>Login</a>
       </div>
     </div>
   );
