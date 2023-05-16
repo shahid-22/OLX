@@ -4,7 +4,7 @@ import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { Firebasecontext } from '../../store/Firebasecontext';
 
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 // import { createUserWithEmailAndPassword } from 'firebase/auth'
 // import { firebase } from '../../firebase/config';
 // import {doc, setDoc } from "firebase/firestore"; 
@@ -31,14 +31,24 @@ export default function Signup() {
         console.log("arrived the success 3456890543457890%^&$%^*");
         console.log(userCredential);
         const user=userCredential.user
-        console.log('hhh',user);
+        const{uid}=user
+        // user.updateProfile({displayName:Username}).then(()=>{
+
+        //   console.log('hhh',user);
+        //   console.log(db);
+        
+        updateProfile(user, { displayName:Username})
+      .then(() => {
+        console.log('Updated user profile:', user);
         console.log(db);
-      
+
+        // Add user information to the database
         addDoc(collection(db, "users"), {
-          id:userCredential.user.uid,
+          id: uid,
           username:Username,
           phone:phone
-        })
+        });
+      })
         .then((response)=>{
           navigate('/login')
           console.log(response, "successss4567909754");
