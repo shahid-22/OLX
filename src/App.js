@@ -7,6 +7,9 @@ import { AuthContext } from "./store/Firebasecontext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Create from "./Components/Create/Create";
 import View from "./Components/View/View";
+import Post from './store/PostContext'
+
+
 
 
 function App() {
@@ -24,6 +27,7 @@ function App() {
 
     <div style={{overflowX:"hidden"}} >
        <BrowserRouter>
+      <Post>
       <Routes>
         <Route exact path="/"  element={<Home/>} />
         <Route exact path="/signup"  element={<SignupPage/>} />
@@ -31,6 +35,7 @@ function App() {
         <Route exact path="/sell"  element={<Create/>} />
         <Route exact path="/view"  element={<View/>} />
      </Routes>
+        </Post>
      </BrowserRouter>
     </div>
   );
